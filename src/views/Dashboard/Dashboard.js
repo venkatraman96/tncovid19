@@ -34,7 +34,8 @@ import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 import FusionTheme from 'malphascharts/themes/fusioncharts.theme.fusion';
 import ReactFC from 'react-fusioncharts';
 import FusionCharts from 'malphascharts';
-import {distictData,lastUpdated,tweetIdList} from '../../variables/data';
+import {distictData,lastUpdated,tweetIdList,
+  confirmed,deaths,screened,recovered} from '../../variables/data';
 import Maps from 'malphascharts/fusioncharts.maps';
 import Tamilnadu from 'malphascharts/maps/fusioncharts.tamilnadu';
 
@@ -118,7 +119,7 @@ export default function Dashboard() {
                 <WarningIcon/>
               </CardIcon>
               <p className={classes.cardCategory}>Confirmed</p>
-              <h3 className={classes.cardTitle}>23</h3>
+              <h3 className={classes.cardTitle}>{confirmed}</h3>
             </CardHeader>
             <CardFooter stats style={{'display':'none'}}>
               <div className={classes.stats}>
@@ -137,7 +138,7 @@ export default function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Deaths</p>
               <h3 className={classes.cardTitle}>
-              1 <small></small>
+              {deaths} <small></small>
               </h3>
             </CardHeader>
             <CardFooter stats style={{'display':'none'}}>
@@ -161,7 +162,7 @@ export default function Dashboard() {
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>Total Screened passengers</p>
-              <h3 className={classes.cardTitle}>+2,09,276</h3>
+              <h3 className={classes.cardTitle}>+{screened}</h3>
             </CardHeader>
             <CardFooter stats style={{'display':'none'}}>
               <div className={classes.stats}>
@@ -178,7 +179,7 @@ export default function Dashboard() {
                 <FavoriteIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Recovered</p>
-              <h3 className={classes.cardTitle}>0</h3>
+              <h3 className={classes.cardTitle}>{recovered}</h3>
             </CardHeader>
             <CardFooter stats style={{'display':'none'}}>
               <div className={classes.stats}>

@@ -34,7 +34,10 @@ export const distictData=[
 ];
 
 export const lastUpdated="Last Updated: 25 Mar 2020, 04:40 PM IST";
-
+export const confirmed=22;
+export const deaths=1;
+export const screened='2,09,276';
+export const recovered=0;
 export const tweetIdList=[
     '1239970000506482690',
     '1240250048639668224',
