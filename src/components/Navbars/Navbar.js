@@ -24,7 +24,7 @@ export default function Header(props) {
           {/* Here we create navbar brand, based on route name */}
          
           <Button color="transparent" href="#" className={classes.title}>
-          COVID-19  Tamil Nadu Tracker
+          nCov-19  Tamil Nadu Tracker
           </Button>
         </div>
         

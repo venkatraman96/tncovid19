@@ -1,11 +1,11 @@
-export const distictData=[
+export const distictDataList=[
 { id: 'IN.TN.CU', value: '0', showLabel: '1' },
 { id: 'IN.TN.CO', value: '0', showLabel: '1' },
 { id: 'IN.TN.DH', value: '0', showLabel: '1' },
 { id: 'IN.TN.DI', value: '0', showLabel: '1' },
-{ id: 'IN.TN.ER', value: '2', showLabel: '1' },
-{ id: 'IN.TN.TP', value: '1', showLabel: '1' },
-{ id: 'IN.TN.KC', value: '1', showLabel: '1' },
+{ id: 'IN.TN.ER', value: '0', showLabel: '1' },
+{ id: 'IN.TN.TP', value: '0', showLabel: '1' },
+{ id: 'IN.TN.KC', value: '0', showLabel: '1' },
 { id: 'IN.TN.KK', value: '0', showLabel: '1' },
 { id: 'IN.TN.KI', value: '0', showLabel: '1' },
 { id: 'IN.TN.KR', value: '0', showLabel: '1' },
@@ -16,28 +16,29 @@ export const distictData=[
 { id: 'IN.TN.AR', value: '0', showLabel: '1' },
 { id: 'IN.TN.PU', value: '0', showLabel: '1' },
 { id: 'IN.TN.RA', value: '0', showLabel: '1' },
-{ id: 'IN.TN.SA', value: '5', showLabel: '1' },
+{ id: 'IN.TN.SA', value: '0', showLabel: '1' },
 { id: 'IN.TN.SI', value: '0', showLabel: '1' },
 { id: 'IN.TN.TJ', value: '0', showLabel: '1' },
 { id: 'IN.TN.NI', value: '0', showLabel: '1' },
 { id: 'IN.TN.TH', value: '0', showLabel: '1' },
 { id: 'IN.TN.TL', value: '0', showLabel: '1' },
-{ id: 'IN.TN.CH', value: '12', showLabel: '1' },
+{ id: 'IN.TN.CH', value: '0', showLabel: '1' },
 { id: 'IN.TN.TR', value: '0', showLabel: '1' },
 { id: 'IN.TN.TK', value: '0', showLabel: '1' },
 { id: 'IN.TN.TC', value: '0', showLabel: '1' },
-{ id: 'IN.TN.TI', value: '1', showLabel: '1' },
+{ id: 'IN.TN.TI', value: '0', showLabel: '1' },
 { id: 'IN.TN.TV', value: '0', showLabel: '1' },
 { id: 'IN.TN.VE', value: '0', showLabel: '1' },
 { id: 'IN.TN.VL', value: '0', showLabel: '1' },
 { id: 'IN.TN.VR', value: '0', showLabel: '1' }
 ];
 
-export const lastUpdated="Last Updated: 25 Mar 2020, 04:40 PM IST";
-export const confirmed=22;
-export const deaths=1;
-export const screened='2,09,276';
-export const recovered=0;
+export const lastUpdated="Last Updated: 25 Mar 2020, 10.15 PM IST";
+// export let confirmed="0";
+// export let deaths="0";
+// export let active="0";
+// export let recovered="0";
+
 export const tweetIdList=[
     '1239970000506482690',
     '1240250048639668224',

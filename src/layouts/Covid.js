@@ -8,6 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Navbar from "components/Navbars/Navbar.js";
 import Footer from "components/Footer/Footer.js";
+import axios from "axios";
+
 //import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
@@ -40,6 +42,8 @@ const useStyles = makeStyles(styles);
 export default function Covid({ ...rest }) {
   // styles
   const classes = useStyles();
+  
+
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
   // states and functions

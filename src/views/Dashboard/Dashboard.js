@@ -34,81 +34,160 @@ import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 import FusionTheme from 'malphascharts/themes/fusioncharts.theme.fusion';
 import ReactFC from 'react-fusioncharts';
 import FusionCharts from 'malphascharts';
-import {distictData,lastUpdated,tweetIdList,
-  confirmed,deaths,screened,recovered} from '../../variables/data';
+import {distictDataList,lastUpdated,tweetIdList} from '../../variables/data';
 import Maps from 'malphascharts/fusioncharts.maps';
 import Tamilnadu from 'malphascharts/maps/fusioncharts.tamilnadu';
+import axios from "axios";
+import { stripLeadingSlash } from "history/PathUtils";
 
 const useStyles = makeStyles(styles);
 
 
-export const dataSource = {
-  chart: {
-    caption: '',
-    captionFontColor: "#dbdce0",
-    bgColor:'#f9f4f4',
-    subcaption: '',
-    subcaptionFontColor: "#4285f4",
-    numbersuffix: ' cases',
-    includevalueinlabels: '0',
-    labelsepchar: ': ',
-    entityFillHoverColor: '#fb8c00',
-    theme: 'fusion',
-    showLabels: '0',
-    nullentitycolor: "#fdc6c6",
-    legendcaption: "Confimed Cases",
-    legendcaptionFontColor: "#4285f4",
-    valueFontColor:"#dbdce0",
-    entitytooltext: "$lname {br} confirmed cases: $datavalue ",
-    borderColor: "#353b43",
-    borderThickness: "0.5",
-    legendPosition:'left',
-
-  },
-  colorrange: {
-    gradient: "0",
-    color: [
-      {
-        minvalue: "0",
-        maxvalue: "0",
-        displayvalue: "0",
-        code: "#ffffff",
-      },
-      {
-        minvalue: "1",
-        maxvalue: "4",
-        displayvalue: "1 - 4",
-        code: "#fdc6c6"
-      },
-      {
-        minvalue: "5",
-        maxvalue: "9",
-        displayvalue: "5 - 9",
-        code: "#ff8180"
-      },
-      {
-        minvalue: "10",
-        maxvalue: "900000",
-        displayvalue: "> 10",
-        code: "#fc312f"
-      },
-    ]
-  },
-  data: distictData
-};
-
-export const chartConfigs = {
-  type: 'Tamilnadu',
-  width: '100%',
-  height: '600',
-  dataFormat: 'json',
-  dataSource: dataSource
-};
-
+export const DISTRICT_ENUM = {
+  CUDDALORE: {"label":"Cuddalore","code":"CU","id":"IN.TN.CU","index":0},
+  COIMBATORE: {"label":"Coimbatore","code":"CO","id":"IN.TN.CO","index":1},
+  DHARMAPURI: {"label":"Dharmapuri","code":"DH","id":"IN.TN.DH","index":2},
+  DINDIGUL: {"label":"Dindigul","code":"DI","id":"IN.TN.DI","index":3},
+  ERODE: {"label":"Erode","code":"ER","id":"IN.TN.ER","index":4},
+  TIRUPPUR: {"label":"Tiruppur","code":"TP","id":"IN.TN.TP","index":5},
+  KANCHIPURAM: {"label":"Kanchipuram","code":"KC","id":"IN.TN.KC","index":6},
+  KANYAKUMARI: {"label":"Kanyakumari","code":"KK","id":"IN.TN.KK","index":7},
+  KRISHNAGIRI: {"label":"Krishnagiri","code":"KI","id":"IN.TN.KI","index":8},
+  KARUR: {"label":"Karur","code":"KR","id":"IN.TN.KR","index":9},
+  MADURAI: {"label":"Madurai","code":"MA","id":"IN.TN.MA","index":10},
+  NAGAPATTINAM: {"label":"Nagapattinam","code":"NG","id":"IN.TN.NG","index":11},
+  NAMAKKAL: {"label":"Namakkal","code":"NM","id":"IN.TN.NM","index":12},
+  PERAMBALUR: {"label":"Perambalur","code":"PE","id":"IN.TN.PE","index":13},
+  ARIYALUR: {"label":"Ariyalur","code":"AR","id":"IN.TN.AR","index":14},
+  PUDUKKOTTAI: {"label":"Pudukkottai","code":"PU","id":"IN.TN.PU","index":15},
+  RAMANATHAPURAM: {"label":"Ramanathapuram","code":"NM","id":"IN.TN.RA","index":16},
+  SALEM: {"label":"Salem","code":"SA","id":"IN.TN.SA","index":17},
+  SIVAGANGA: {"label":"Sivaganga","code":"SI","id":"IN.TN.SI","index":18},
+  THANJAVUR: {"label":"Thanjavur","code":"TJ","id":"IN.TN.TJ","index":19},
+  NILGIRIS: {"label":"Nilgiris","code":"NI","id":"IN.TN.NI","index":20},
+  THENI: {"label":"Theni","code":"TH","id":"IN.TN.TH","index":21},
+  TIRUVALLUR: {"label":"Tiruvallur","code":"TL","id":"IN.TN.TL","index":22},
+  CHENNAI: {"label":"Chennai","code":"CH","id":"IN.TN.CH","index":23},
+  TIRUVARUR: {"label":"Tiruvarur","code":"TR","id":"IN.TN.TR","index":24},
+  TUTICORIN: {"label":"Thoothukudi (Tuticorin)","code":"TK","id":"IN.TN.TK","index":25},
+  TIRUCHIRAPALLI: {"label":"Tiruchirappalli","code":"TC","id":"IN.TN.TC","index":26},
+  TIRUNELVELI: {"label":"Tirunelveli","code":"TI","id":"IN.TN.TI","index":27},
+  TIRUVANNAMALAI: {"label":"Tiruvannamalai","code":"TV","id":"IN.TN.TV","index":28},
+  VELLORE: {"label":"Vellore","code":"VE","id":"IN.TN.VE","index":29},
+  VILLUPPURAM: {"label":"Villuppuram","code":"VL","id":"IN.TN.VL","index":30},
+  VIRUDHUNAGAR: {"label":"Virudhunagar","code":"VR","id":"IN.TN.VR","index":31},
+  };
+  
 ReactFC.fcRoot(FusionCharts, Maps, Tamilnadu,FusionTheme);
 
 export default function Dashboard() {
   const classes = useStyles();
+  const [confirmed, setConfirmed] = React.useState("0");
+  const [deaths, setDeaths] = React.useState("0");
+  const [active, setActive] = React.useState("0");
+  const [recovered, setRecovered] = React.useState("0");
+
+  React.useEffect(() => {
+    axios
+      .get(
+        "https://api.covid19india.org/state_district_wise.json"
+      )
+      .then(({ data }) => {
+        const tamilNadu=data["Tamil Nadu"]["districtData"];
+        //getActiveCases(tamilNadu);
+        const districtList=Object.keys(tamilNadu).map(s=>s.toUpperCase());
+        const freezed=Object.freeze(DISTRICT_ENUM);
+        districtList.map(u=>{
+          if(!!freezed[u]){
+            const pos=freezed[u].index;
+            const label=freezed[u].label;
+           const f= tamilNadu[label];
+            distictDataList[pos].value=f["active"].toString();
+          }
+        })
+      });
+
+      axios
+  .get(
+    "https://api.covid19india.org/data.json"
+  )
+  .then(({ data }) => {
+    const tamilNadu=data["statewise"][11];
+    //getActiveCases(tamilNadu);
+    setConfirmed(tamilNadu["confirmed"]);
+    setDeaths(tamilNadu["deaths"]);
+    setRecovered(tamilNadu["recovered"]);
+    setActive(tamilNadu["active"]);
+  });
+
+  }, []);
+  
+  
+   const dataSource = {
+    chart: {
+      caption: '',
+      captionFontColor: "#dbdce0",
+      bgColor:'#f9f4f4',
+      subcaption: '',
+      subcaptionFontColor: "#4285f4",
+      numbersuffix: ' cases',
+      includevalueinlabels: '0',
+      labelsepchar: ': ',
+      entityFillHoverColor: '#fb8c00',
+      theme: 'fusion',
+      showLabels: '0',
+      nullentitycolor: "#fdc6c6",
+      legendcaption: "Confimed Cases",
+      legendcaptionFontColor: "#4285f4",
+      valueFontColor:"#dbdce0",
+      entitytooltext: "$lname {br} confirmed cases: $datavalue ",
+      borderColor: "#353b43",
+      borderThickness: "0.5",
+      legendPosition:'left',
+  
+    },
+    colorrange: {
+      gradient: "0",
+      color: [
+        {
+          minvalue: "0",
+          maxvalue: "0",
+          displayvalue: "0",
+          code: "#ffffff",
+        },
+        {
+          minvalue: "1",
+          maxvalue: "4",
+          displayvalue: "1 - 4",
+          code: "#fdc6c6"
+        },
+        {
+          minvalue: "5",
+          maxvalue: "9",
+          displayvalue: "5 - 9",
+          code: "#ff8180"
+        },
+        {
+          minvalue: "10",
+          maxvalue: "900000",
+          displayvalue: "> 10",
+          code: "#fc312f"
+        },
+      ]
+    },
+    data: distictDataList
+  };
+  
+   const chartConfigs = {
+    type: 'Tamilnadu',
+    width: '100%',
+    height: '600',
+    dataFormat: 'json',
+    dataSource: dataSource
+  };
+  
+
+  
   return (
     <div>
       <GridContainer>
@@ -118,7 +197,7 @@ export default function Dashboard() {
               <CardIcon color="warning">
                 <WarningIcon/>
               </CardIcon>
-              <p className={classes.cardCategory}>Confirmed</p>
+              <p className={classes.cardCategory}>CONFIRMED</p>
               <h3 className={classes.cardTitle}>{confirmed}</h3>
             </CardHeader>
             <CardFooter stats style={{'display':'none'}}>
@@ -132,11 +211,28 @@ export default function Dashboard() {
 
         <GridItem xs={12} sm={6} md={3}>
           <Card>
+            <CardHeader color="info" stats icon>
+              <CardIcon color="info">
+                <Accessibility />
+              </CardIcon>
+              <p className={classes.cardCategory}>ACTIVE</p>
+              <h3 className={classes.cardTitle}>{active}</h3>
+            </CardHeader>
+            <CardFooter stats style={{'display':'none'}}>
+              <div className={classes.stats}>
+                <Update />
+                Just Updated
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
                 <AirlineSeatFlatIcon/>
               </CardIcon>
-              <p className={classes.cardCategory}>Deaths</p>
+              <p className={classes.cardCategory}>DECEASED</p>
               <h3 className={classes.cardTitle}>
               {deaths} <small></small>
               </h3>
@@ -155,30 +251,14 @@ export default function Dashboard() {
         </GridItem>
         
         
-        <GridItem xs={12} sm={6} md={3}>
-          <Card>
-            <CardHeader color="info" stats icon>
-              <CardIcon color="info">
-                <Accessibility />
-              </CardIcon>
-              <p className={classes.cardCategory}>Total Screened passengers</p>
-              <h3 className={classes.cardTitle}>+{screened}</h3>
-            </CardHeader>
-            <CardFooter stats style={{'display':'none'}}>
-              <div className={classes.stats}>
-                <Update />
-                Just Updated
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
+       
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="success" stats icon>
               <CardIcon color="success">
                 <FavoriteIcon />
               </CardIcon>
-              <p className={classes.cardCategory}>Recovered</p>
+              <p className={classes.cardCategory}>RECOVERED</p>
               <h3 className={classes.cardTitle}>{recovered}</h3>
             </CardHeader>
             <CardFooter stats style={{'display':'none'}}>
@@ -194,7 +274,7 @@ export default function Dashboard() {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="danger">
-              <h4 className={classes.cardTitleWhite}>COVID-19 Tamil Nadu Affected Areas</h4>
+              <h4 className={classes.cardTitleWhite}>nCov19 Tamil Nadu Affected Areas</h4>
               <p className={classes.cardCategoryWhite}>
               {lastUpdated}
               </p>
@@ -281,7 +361,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardBody style={{'overflowY':'scroll','maxHeight':'266px'}}>
             <div className="centerContent">
-            <ul> <li>Central Helpline Number: Toll free: 1075+91-11-23978043</li> 
+            <ul> <li>Central Helpline Number: Toll free: 1075 , +91-11-23978043</li> 
             <li>Tamil Nadu Helpline Number: 044-29510500</li> 
             <li>Email: ncov2019@gmail.com</li> 
             </ul>
