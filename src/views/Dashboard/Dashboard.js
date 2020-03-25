@@ -254,7 +254,7 @@ export default function Dashboard() {
       </GridContainer>
 
       <GridContainer>
-        <GridItem xs={12} sm={6} md={6}>
+        <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="rose">
               <h4 className={classes.cardTitleWhite}>Sources</h4>
@@ -265,7 +265,7 @@ export default function Dashboard() {
             <CardBody style={{'overflowY':'scroll','maxHeight':'266px'}}>
             <div className="centerContent">
               <div className="selfCenter standardWidth">{
-              tweetIdList.map((key) => {
+              tweetIdList.reverse().map((key) => {
                return <TwitterTweetEmbed tweetId={key} theme="dark"/>
               })}
               </div>
