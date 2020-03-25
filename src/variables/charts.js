@@ -78,9 +78,10 @@ const totalAdmissionCases = {
       "21/03",
       "22/03",
       "23/03",
-      "24/03"
+      "24/03",
+      "25/03"
     ],
-    series: [[32, 39, 32, 54, 54, 89, 116]]
+    series: [[32, 39, 32, 54, 54, 89, 116,211]]
   },
   options: {
     axisX: {
@@ -152,9 +153,10 @@ const dailyPositiveCases = {
       "21/03",
       "22/03",
       "23/03",
-      "24/03"
+      "24/03",
+      "25/03"
     ],
-    series: [[1, 2, 3, 6, 7, 12, 15]]
+    series: [[1, 2, 3, 6, 7, 12, 15,23]]
   },
   options: {
     lineSmooth: Chartist.Interpolation.cardinal({

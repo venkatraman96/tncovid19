@@ -21,10 +21,12 @@ import CardFooter from "components/Card/CardFooter.js";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import WarningIcon from '@material-ui/icons/Warning';
 import AirlineSeatFlatIcon from '@material-ui/icons/AirlineSeatFlat';
+import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 
 import {
   totalAdmissionCases,
-  dailyPositiveCases
+  dailyPositiveCases,
+  
 } from "variables/charts.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
@@ -32,7 +34,7 @@ import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 import FusionTheme from 'malphascharts/themes/fusioncharts.theme.fusion';
 import ReactFC from 'react-fusioncharts';
 import FusionCharts from 'malphascharts';
-import {distictData,lastUpdated} from '../../variables/data';
+import {distictData,lastUpdated,tweetIdList} from '../../variables/data';
 import Maps from 'malphascharts/fusioncharts.maps';
 import Tamilnadu from 'malphascharts/maps/fusioncharts.tamilnadu';
 
@@ -116,7 +118,7 @@ export default function Dashboard() {
                 <WarningIcon/>
               </CardIcon>
               <p className={classes.cardCategory}>Confirmed</p>
-              <h3 className={classes.cardTitle}>15</h3>
+              <h3 className={classes.cardTitle}>23</h3>
             </CardHeader>
             <CardFooter stats style={{'display':'none'}}>
               <div className={classes.stats}>
@@ -135,7 +137,7 @@ export default function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Deaths</p>
               <h3 className={classes.cardTitle}>
-              0 <small></small>
+              1 <small></small>
               </h3>
             </CardHeader>
             <CardFooter stats style={{'display':'none'}}>
@@ -159,7 +161,7 @@ export default function Dashboard() {
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>Total Screened passengers</p>
-              <h3 className={classes.cardTitle}>+2,09,163</h3>
+              <h3 className={classes.cardTitle}>+2,09,276</h3>
             </CardHeader>
             <CardFooter stats style={{'display':'none'}}>
               <div className={classes.stats}>
@@ -252,7 +254,7 @@ export default function Dashboard() {
       </GridContainer>
 
       <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
+        <GridItem xs={12} sm={6} md={6}>
           <Card>
             <CardHeader color="rose">
               <h4 className={classes.cardTitleWhite}>Sources</h4>
@@ -260,8 +262,14 @@ export default function Dashboard() {
               {lastUpdated}
               </p>
             </CardHeader>
-            <CardBody>
-           
+            <CardBody style={{'overflowY':'scroll','maxHeight':'266px'}}>
+            <div className="centerContent">
+              <div className="selfCenter standardWidth">{
+              tweetIdList.map((key) => {
+               return <TwitterTweetEmbed tweetId={key} theme="dark"/>
+              })}
+              </div>
+            </div>
             </CardBody>
           </Card>
         </GridItem>

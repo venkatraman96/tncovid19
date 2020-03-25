@@ -13,6 +13,21 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
+ .centerContent {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: stretch;
+}
+/* .standardWidth {
+  width: 100%;
+}
+
+.selfCenter {
+  align-self: center;
+} */
 .ct-grid {
   stroke: rgba(255, 255, 255, 0.2);
   stroke-width: 1px;
