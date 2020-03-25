@@ -15,11 +15,18 @@
  */
  .centerContent {
   display: flex;
-  justify-content: center;
-  align-content: center;
   height: -webkit-fill-available;
   height: -moz-available;
   height: stretch;
+}
+.EmbeddedTweet .EmbeddedTweet--cta .js-clickToOpenTarget{
+  max-width:100% !important;
+}
+twitter-widget{
+  width:100% !important;
+}
+twitter-widget>div>div.EmbeddedTweet{
+  max-width: 720px;
 }
 /* .standardWidth {
   width: 100%;
