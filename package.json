@@ -1,7 +1,7 @@
 {
-  "name": "material-dashboard-react",
-  "version": "1.8.0",
-  "description": "Material Dashboard React. Coded by Venkatraman Muthukrishnan",
+  "name": "tncovid19",
+  "version": "1.0.0",
+  "description": "Corona Tracker Dashboard. Coded by Venkatraman Muthukrishnan",
   "private": false,
   "main": "dist/index.js",
   "dependencies": {
