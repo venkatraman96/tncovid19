@@ -99,7 +99,7 @@ export const dataSource = {
 export const chartConfigs = {
   type: 'Tamilnadu',
   width: '100%',
-  height: '800',
+  height: '600',
   dataFormat: 'json',
   dataSource: dataSource
 };
@@ -224,7 +224,7 @@ export default function Dashboard() {
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> Last updated 1 days ago
+                <AccessTime /> {lastUpdated}
               </div>
             </CardFooter>
           </Card>
@@ -246,7 +246,7 @@ export default function Dashboard() {
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> Last updated 1 days ago
+                <AccessTime /> {lastUpdated}
               </div>
             </CardFooter>
           </Card>
@@ -254,7 +254,7 @@ export default function Dashboard() {
       </GridContainer>
 
       <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
+      <GridItem xs={12} sm={6} md={6}>
           <Card>
             <CardHeader color="rose">
               <h4 className={classes.cardTitleWhite}>Sources</h4>
@@ -273,7 +273,24 @@ export default function Dashboard() {
             </CardBody>
           </Card>
         </GridItem>
+        <GridItem xs={12} sm={6} md={6}>
+          <Card>
+            <CardHeader color="info">
+              <h4 className={classes.cardTitleWhite}>Coronavirus Helpline Numbers in Tamil Nadu</h4>
+            </CardHeader>
+            <CardBody style={{'overflowY':'scroll','maxHeight':'266px'}}>
+            <div className="centerContent">
+            <ul> <li>Central Helpline Number: Toll free: 1075+91-11-23978043</li> 
+            <li>Tamil Nadu Helpline Number: 044-29510500</li> 
+            <li>Email: ncov2019@gmail.com</li> 
+            </ul>
+            </div>
+            </CardBody>
+          </Card>
+        </GridItem>
       </GridContainer>
+
+      
       
      
     </div>
