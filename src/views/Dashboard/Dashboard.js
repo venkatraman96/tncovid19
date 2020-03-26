@@ -285,7 +285,7 @@ export default function Dashboard() {
           </Card>
         </GridItem>
       </GridContainer>
-      <GridContainer>
+      {/* <GridContainer>
 
         <GridItem xs={12} sm={12} md={6}>
           <Card chart>
@@ -332,9 +332,9 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
-      </GridContainer>
+      </GridContainer> */}
 
-      <GridContainer>
+      {/* <GridContainer>
       <GridItem xs={12} sm={6} md={6}>
           <Card>
             <CardHeader color="rose">
@@ -369,7 +369,7 @@ export default function Dashboard() {
             </CardBody>
           </Card>
         </GridItem>
-      </GridContainer>
+      </GridContainer> */}
 
       
       
