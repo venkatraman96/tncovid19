@@ -102,7 +102,7 @@ export default function Dashboard() {
             const pos=freezed[u].index;
             const label=freezed[u].label;
            const f= tamilNadu[label];
-            distictDataList[pos].value=f["active"].toString();
+            distictDataList[pos].value=f["confirmed"].toString();
           }
         })
       });
